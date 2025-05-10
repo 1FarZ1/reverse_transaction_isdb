@@ -2,6 +2,7 @@
 import streamlit as st
 import json
 import re
+import os
 from typing import Dict, List
 import numpy as np
 from langchain.agents import AgentExecutor, create_openai_tools_agent
@@ -18,7 +19,7 @@ from langchain.prompts import ChatPromptTemplate
 from langchain.schema.messages import SystemMessage, HumanMessage
 
 
-client = OpenAI(api_key='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')
+# client = OpenAI(api_key='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')
 EXAMPLE_ENTRIES = {
     "FAS 4 - Mudarabah": """
 Context: GreenTech exits in Year 3, and Al Baraka Bank buys out its stake.
@@ -221,7 +222,7 @@ class ShariaComplianceTool(BaseTool):
 
 class AAOIFIAgent:
     def __init__(self):
-        self.llm = ChatOpenAI(model="gpt-4", temperature=0.8,api_key='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')
+        self.llm = ChatOpenAI(model="gpt-4", temperature=0.8,api_key=os.getenv("OPENAI_API_KEY"))
         self.tools = [FASLookupTool(), ShariaComplianceTool()]
         self.memory = ConversationBufferMemory(memory_key="chat_history")
         self.agent = create_openai_tools_agent(
