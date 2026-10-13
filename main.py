@@ -19,7 +19,7 @@ from langchain.prompts import ChatPromptTemplate
 from langchain.schema.messages import SystemMessage, HumanMessage
 
 
-# client = OpenAI(api_key='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')
+# client = OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
 EXAMPLE_ENTRIES = {
     "FAS 4 - Mudarabah": """
 Context: GreenTech exits in Year 3, and Al Baraka Bank buys out its stake.
